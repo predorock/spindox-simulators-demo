@@ -2,6 +2,8 @@ import {Component, Input, OnInit, ViewEncapsulation} from '@angular/core';
 import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {IIngredient} from "../../interfaces/ingredient.interface";
 import {HttpClient} from "@angular/common/http";
+import {AbstractSimulator} from "@simulators";
+import {IPizzaSimulatorConfig} from "../../interfaces/pizza-simulator-config.interface";
 
 @Component({
   selector: 'app-pizza-simulator',
@@ -9,24 +11,21 @@ import {HttpClient} from "@angular/common/http";
   styleUrls: ['./pizza-simulator.component.scss'],
   encapsulation: ViewEncapsulation.ShadowDom
 })
-export class PizzaSimulatorComponent implements OnInit {
-
-  @Input()
-  config: string;
-  configObj: any;
+export class PizzaSimulatorComponent extends AbstractSimulator<IPizzaSimulatorConfig> implements OnInit {
 
   pizzaForm: FormGroup;
 
   ingredients: IIngredient[];
 
   get apiUrl() {
-    return this.configObj.apiUrl || 'https://pizzaship.com'
+    return this.simulatorConfig.apiUrl || 'https://pizzaship.com'
   }
 
   constructor(
     private fb: FormBuilder,
     private http: HttpClient
   ) {
+    super();
   }
 
   ngOnInit(): void {
@@ -77,10 +76,6 @@ export class PizzaSimulatorComponent implements OnInit {
       composition: ['', Validators.required],
       ingredients: this.fb.array([])
     });
-
-    console.log(this.config);
-    this.configObj = JSON.parse(this.config);
-    console.log(this.configObj);
   }
 
   onIngredientChange(checked: boolean, ingredient: IIngredient) {

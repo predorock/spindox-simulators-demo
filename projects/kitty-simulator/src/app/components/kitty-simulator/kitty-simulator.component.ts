@@ -1,11 +1,11 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {KittySimulatorService} from '../../services/kitty-simulator.service';
 import {Observable} from "rxjs";
 import {map, tap} from "rxjs/operators";
+import {AbstractSimulator} from "@simulators";
+import {IKittySimulatorConfig} from "../../interfaces/kitty-simulator-config.interface";
+import {Kitty} from "../../interfaces/kitty.interface";
 
-interface Kitty {
-  url: string;
-}
 
 @Component({
   selector: 'kitty-simulator',
@@ -25,14 +25,9 @@ interface Kitty {
       Loading fluffy kittens ...
     </ng-template>
   `,
-  styles: [
-  ]
+  styles: []
 })
-export class KittySimulatorComponent implements OnInit {
-
-  @Input()
-  config: any;
-  configObj: any;
+export class KittySimulatorComponent extends AbstractSimulator<IKittySimulatorConfig> implements OnInit {
 
   kittens$: Observable<Kitty[]>;
   breeds: any[];
@@ -41,12 +36,14 @@ export class KittySimulatorComponent implements OnInit {
   loading = true;
 
   get kittyHeight() {
-    return this.config.height || 300;
+    return this.simulatorConfig.height || 300;
   }
 
   constructor(
     private kittyService: KittySimulatorService
-  ) { }
+  ) {
+    super();
+  }
 
   ngOnInit(): void {
     this.kittyService.breeds().subscribe(breeds => {
@@ -54,10 +51,6 @@ export class KittySimulatorComponent implements OnInit {
       this.selectedBreed = breeds[0];
       this.loading = false;
     })
-
-    console.log(this.config);
-    this.configObj = JSON.parse(this.config);
-    console.log(this.configObj);
   }
 
   onBreedChange(breed: any) {
