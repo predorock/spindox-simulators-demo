@@ -2,5 +2,372 @@
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
   "version": 1,
   "newProjectRoot": "projects",
-  "projects": {}
+  "projects": {
+    "kitty-simulator": {
+      "projectType": "application",
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss"
+        }
+      },
+      "root": "projects/kitty-simulator",
+      "sourceRoot": "projects/kitty-simulator/src",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/kitty-simulator",
+            "index": "projects/kitty-simulator/src/index.html",
+            "main": "projects/kitty-simulator/src/main.ts",
+            "polyfills": "projects/kitty-simulator/src/polyfills.ts",
+            "tsConfig": "projects/kitty-simulator/tsconfig.app.json",
+            "aot": true,
+            "assets": [
+              "projects/kitty-simulator/src/favicon.ico",
+              "projects/kitty-simulator/src/assets"
+            ],
+            "styles": [
+              "projects/kitty-simulator/src/styles.scss"
+            ],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "projects/kitty-simulator/src/environments/environment.ts",
+                  "with": "projects/kitty-simulator/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb",
+                  "maximumError": "10kb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "kitty-simulator:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "kitty-simulator:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "kitty-simulator:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/kitty-simulator/src/test.ts",
+            "polyfills": "projects/kitty-simulator/src/polyfills.ts",
+            "tsConfig": "projects/kitty-simulator/tsconfig.spec.json",
+            "karmaConfig": "projects/kitty-simulator/karma.conf.js",
+            "assets": [
+              "projects/kitty-simulator/src/favicon.ico",
+              "projects/kitty-simulator/src/assets"
+            ],
+            "styles": [
+              "projects/kitty-simulator/src/styles.scss"
+            ],
+            "scripts": []
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/kitty-simulator/tsconfig.app.json",
+              "projects/kitty-simulator/tsconfig.spec.json",
+              "projects/kitty-simulator/e2e/tsconfig.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        },
+        "e2e": {
+          "builder": "@angular-devkit/build-angular:protractor",
+          "options": {
+            "protractorConfig": "projects/kitty-simulator/e2e/protractor.conf.js",
+            "devServerTarget": "kitty-simulator:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "kitty-simulator:serve:production"
+            }
+          }
+        }
+      }
+    },
+    "dummy-simulator": {
+      "projectType": "application",
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss"
+        }
+      },
+      "root": "projects/dummy-simulator",
+      "sourceRoot": "projects/dummy-simulator/src",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/dummy-simulator",
+            "index": "projects/dummy-simulator/src/index.html",
+            "main": "projects/dummy-simulator/src/main.ts",
+            "polyfills": "projects/dummy-simulator/src/polyfills.ts",
+            "tsConfig": "projects/dummy-simulator/tsconfig.app.json",
+            "aot": true,
+            "assets": [
+              "projects/dummy-simulator/src/favicon.ico",
+              "projects/dummy-simulator/src/assets"
+            ],
+            "styles": [
+              "projects/dummy-simulator/src/styles.scss"
+            ],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "projects/dummy-simulator/src/environments/environment.ts",
+                  "with": "projects/dummy-simulator/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb",
+                  "maximumError": "10kb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "dummy-simulator:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "dummy-simulator:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "dummy-simulator:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/dummy-simulator/src/test.ts",
+            "polyfills": "projects/dummy-simulator/src/polyfills.ts",
+            "tsConfig": "projects/dummy-simulator/tsconfig.spec.json",
+            "karmaConfig": "projects/dummy-simulator/karma.conf.js",
+            "assets": [
+              "projects/dummy-simulator/src/favicon.ico",
+              "projects/dummy-simulator/src/assets"
+            ],
+            "styles": [
+              "projects/dummy-simulator/src/styles.scss"
+            ],
+            "scripts": []
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/dummy-simulator/tsconfig.app.json",
+              "projects/dummy-simulator/tsconfig.spec.json",
+              "projects/dummy-simulator/e2e/tsconfig.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        },
+        "e2e": {
+          "builder": "@angular-devkit/build-angular:protractor",
+          "options": {
+            "protractorConfig": "projects/dummy-simulator/e2e/protractor.conf.js",
+            "devServerTarget": "dummy-simulator:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "dummy-simulator:serve:production"
+            }
+          }
+        }
+      }
+    },
+    "pizza-simulator": {
+      "projectType": "application",
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss"
+        }
+      },
+      "root": "projects/pizza-simulator",
+      "sourceRoot": "projects/pizza-simulator/src",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/pizza-simulator",
+            "index": "projects/pizza-simulator/src/index.html",
+            "main": "projects/pizza-simulator/src/main.ts",
+            "polyfills": "projects/pizza-simulator/src/polyfills.ts",
+            "tsConfig": "projects/pizza-simulator/tsconfig.app.json",
+            "aot": true,
+            "assets": [
+              "projects/pizza-simulator/src/favicon.ico",
+              "projects/pizza-simulator/src/assets"
+            ],
+            "styles": [
+              "projects/pizza-simulator/src/styles.scss"
+            ],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "projects/pizza-simulator/src/environments/environment.ts",
+                  "with": "projects/pizza-simulator/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb",
+                  "maximumError": "10kb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "pizza-simulator:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "pizza-simulator:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "pizza-simulator:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/pizza-simulator/src/test.ts",
+            "polyfills": "projects/pizza-simulator/src/polyfills.ts",
+            "tsConfig": "projects/pizza-simulator/tsconfig.spec.json",
+            "karmaConfig": "projects/pizza-simulator/karma.conf.js",
+            "assets": [
+              "projects/pizza-simulator/src/favicon.ico",
+              "projects/pizza-simulator/src/assets"
+            ],
+            "styles": [
+              "projects/pizza-simulator/src/styles.scss"
+            ],
+            "scripts": []
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/pizza-simulator/tsconfig.app.json",
+              "projects/pizza-simulator/tsconfig.spec.json",
+              "projects/pizza-simulator/e2e/tsconfig.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        },
+        "e2e": {
+          "builder": "@angular-devkit/build-angular:protractor",
+          "options": {
+            "protractorConfig": "projects/pizza-simulator/e2e/protractor.conf.js",
+            "devServerTarget": "pizza-simulator:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "pizza-simulator:serve:production"
+            }
+          }
+        }
+      }
+    }},
+  "cli": {
+    "analytics": false
+  },
+  "defaultProject": "kitty-simulator"
 }
