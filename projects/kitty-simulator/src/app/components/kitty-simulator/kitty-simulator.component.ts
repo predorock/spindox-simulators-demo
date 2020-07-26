@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {KittySimulatorService} from '../../services/kitty-simulator.service';
 import {Observable} from "rxjs";
 import {map, tap} from "rxjs/operators";
@@ -17,7 +17,7 @@ interface Kitty {
       </select>
       <ng-container *ngIf="selectedBreed">
         <div class="kittens-container" *ngFor="let kitty of kittens$ | async">
-          <img [src]="kitty.url" height="200">
+          <img [src]="kitty.url" [height]="kittyHeight">
         </div>
       </ng-container>
     </ng-template>
@@ -30,11 +30,19 @@ interface Kitty {
 })
 export class KittySimulatorComponent implements OnInit {
 
+  @Input()
+  config: any;
+  configObj: any;
+
   kittens$: Observable<Kitty[]>;
   breeds: any[];
   selectedBreed: any;
 
   loading = true;
+
+  get kittyHeight() {
+    return this.config.height || 300;
+  }
 
   constructor(
     private kittyService: KittySimulatorService
@@ -46,6 +54,10 @@ export class KittySimulatorComponent implements OnInit {
       this.selectedBreed = breeds[0];
       this.loading = false;
     })
+
+    console.log(this.config);
+    this.configObj = JSON.parse(this.config);
+    console.log(this.configObj);
   }
 
   onBreedChange(breed: any) {

@@ -1,14 +1,43 @@
-
 <div class="pizza-simulator-container">
-  <h3>Let's Make Pizza</h3>
-  <form [formGroup]="pizzaForm">
-    <mat-form-field class="example-form-field">
-      <mat-label>Clearable input</mat-label>
-      <input matInput type="text" [(ngModel)]="value">
-    </mat-form-field>
-    <!-- TODO: pizza name -->
-    <!-- TODO: white or red pizza -->
-    <!-- TODO: pasta composition -->
-    <!-- TODO: ingredients -->
+  <form [formGroup]="pizzaForm" (ngSubmit)="onFormSubmit()">
+    <h3>Let's Make Pizza</h3>
+    <div class="form-field-container">
+      <mat-form-field class="example-form-field">
+        <mat-label>Pizza's Name</mat-label>
+        <input matInput type="text" formControlName="name">
+        <mat-error *ngIf="pizzaForm.invalid && pizzaForm.controls.name.invalid">Pizza's name is mandatory</mat-error>
+      </mat-form-field>
+    </div>
+    <div class="form-field-container">
+      <h3>Pizzas Color Type</h3>
+      <mat-radio-group aria-label="Select an option" formControlName="color">
+        <mat-radio-button value="white">White (only Mozzarella)</mat-radio-button>
+        <mat-radio-button value="red">Red (Tomatoes sauce and Mozzarella)</mat-radio-button>
+      </mat-radio-group>
+      <mat-error *ngIf="pizzaForm.invalid  && pizzaForm.controls.color.invalid">Pizza's color is mandatory</mat-error>
+    </div>
+    <div class="form-field-container">
+      <h3>Pizzas Composition</h3>
+      <mat-radio-group aria-label="Select an option" formControlName="composition">
+        <mat-radio-button value="normal">Normal pasta composition</mat-radio-button>
+        <mat-radio-button value="double-pasta">Double pasta composition</mat-radio-button>
+        <mat-radio-button value="multi-cereal">Multi Cereal pasta composition</mat-radio-button>
+        <mat-radio-button value="black">Carbon black pasta</mat-radio-button>
+      </mat-radio-group>
+      <mat-error *ngIf="pizzaForm.invalid && pizzaForm.controls.composition.invalid">Pizza's composition is mandatory</mat-error>
+
+    </div>
+    <div class="form-field-container">
+      <h3>Choose your ingredients</h3>
+      <div>
+        <mat-checkbox *ngFor="let ingredient of ingredients" class="example-margin" [value]="ingredient" (change)="onIngredientChange($event.checked, ingredient)">
+          {{ingredient.name}}
+        </mat-checkbox>
+      </div>
+      <mat-error *ngIf="pizzaForm.invalid && pizzaForm.controls.ingredients.invalid">You have to choose at least 1 ingredient</mat-error>
+    </div>
+    <div class="form-field-container">
+      <button mat-raised-button color="primary">Create your pizza</button>
+    </div>
   </form>
 </div>
