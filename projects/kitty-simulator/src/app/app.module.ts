@@ -1,16 +1,36 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import {Injector, NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {BrowserModule} from '@angular/platform-browser';
+import {createCustomElement} from '@angular/elements';
+import {HttpClientModule} from '@angular/common/http';
+import {KittySimulatorComponent} from "./components/kitty-simulator/kitty-simulator.component";
+import {FormsModule} from "@angular/forms";
 
-import { AppComponent } from './app.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    KittySimulatorComponent
   ],
   imports: [
-    BrowserModule
+    CommonModule,
+    FormsModule,
+    BrowserModule,
+    HttpClientModule
   ],
-  providers: [],
-  bootstrap: [AppComponent]
+  entryComponents: [
+    KittySimulatorComponent
+  ]
 })
-export class AppModule { }
+export class AppModule {
+  constructor(
+    private injector: Injector
+  ) {}
+
+  ngDoBootstrap() {
+    const tagName = 'kitty-simulator';
+    if (!customElements.get(tagName)) {
+      const el = createCustomElement(KittySimulatorComponent, {injector: this.injector});
+      customElements.define(tagName, el);
+    }
+  }
+}

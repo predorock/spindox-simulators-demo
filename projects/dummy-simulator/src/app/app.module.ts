@@ -1,16 +1,39 @@
+import { NgModule, Injector } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import {createCustomElement} from '@angular/elements';
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {DummySimulatorComponent} from "./components/dummy-simulator/dummy-simulator.component";
+import {CurrencyPipe} from "./pipes/currency.pipe";
 
-import { AppComponent } from './app.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    DummySimulatorComponent,
+    CurrencyPipe
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    CommonModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
-  providers: [],
-  bootstrap: [AppComponent]
+  entryComponents: [
+    DummySimulatorComponent
+  ]
 })
-export class AppModule { }
+export class AppModule {
+
+  constructor(
+    private injector: Injector
+  ) {}
+
+  ngDoBootstrap() {
+    const tagName = 'dummy-simulator';
+    if (!customElements.get(tagName)) {
+      const el = createCustomElement(DummySimulatorComponent, {injector: this.injector});
+      customElements.define(tagName, el);
+    }
+  }
+
+}

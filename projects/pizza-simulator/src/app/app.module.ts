@@ -1,18 +1,41 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
-
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
+import {BrowserModule} from '@angular/platform-browser';
+import {Injector, NgModule} from '@angular/core';
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {PizzaSimulatorComponent} from "./components/pizza-simulator/pizza-simulator.component";
+import {createCustomElement} from "@angular/elements";
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatInputModule} from '@angular/material/input';
+import {MatSelectModule} from '@angular/material/select';
+import {MatCheckboxModule} from '@angular/material/checkbox';
 
 @NgModule({
   declarations: [
-    AppComponent
+    PizzaSimulatorComponent
+  ],
+  entryComponents: [
+    PizzaSimulatorComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    FormsModule,
+    ReactiveFormsModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatSelectModule,
+    MatCheckboxModule
   ],
   providers: [],
-  bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+  constructor(
+    private injector: Injector
+  ) {}
+
+  ngDoBootstrap() {
+    const tagName = 'pizza-simulator';
+    if (!customElements.get(tagName)) {
+      const el = createCustomElement(PizzaSimulatorComponent, {injector: this.injector});
+      customElements.define(tagName, el);
+    }
+  }
+}

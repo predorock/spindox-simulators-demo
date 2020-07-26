@@ -1,0 +1,12 @@
+<div class="dummy-simulator-container">
+  <form [formGroup]="simulatorForm" (ngSubmit)="formSubmit()">
+    <div class="input-container">
+      <label for="simulator-input">Your expense:</label>
+      <input type="number" id="simulator-input" name="simulator-input" formControlName="value">
+    </div>
+    <button type="submit"> Calculate </button>
+ </form>
+ <div class="result-container" *ngIf="interestValue">
+   {{interestValue | myCurrency}}
+ </div>
+</div>

@@ -7,15 +7,21 @@
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "serve:dummy-simulator": "ng serve --project dummy-simulator --port 7800",
+    "serve:kitty-simulator": "ng serve --project kitty-simulator --port 7810",
+    "serve:pizza-simulator": "ng serve --project pizza-simulator --port 7820"
   },
   "private": true,
   "dependencies": {
     "@angular/animations": "~9.1.2",
+    "@angular/cdk": "^10.1.0",
     "@angular/common": "~9.1.2",
     "@angular/compiler": "~9.1.2",
     "@angular/core": "~9.1.2",
+    "@angular/elements": "^10.0.5",
     "@angular/forms": "~9.1.2",
+    "@angular/material": "^10.1.0",
     "@angular/platform-browser": "~9.1.2",
     "@angular/platform-browser-dynamic": "~9.1.2",
     "@angular/router": "~9.1.2",
